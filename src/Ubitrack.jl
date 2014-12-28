@@ -23,16 +23,16 @@ end
 addHeaderDir(utheaderdir; kind = C_System)
 
 # utilities
-cxxinclude(jointpath(utheaderdir, "utUtil/Logging.h"))
-cxxinclude(jointpath(utheaderdir, "utUtil/Exception.h"))
+cxxinclude(joinpath(utheaderdir, "utUtil/Logging.h"))
+cxxinclude(joinpath(utheaderdir, "utUtil/Exception.h"))
 
 # math
-cxxinclude(jointpath(utheaderdir, "utMath/Vector.h"))
-cxxinclude(jointpath(utheaderdir, "utMath/Matrix.h"))
-cxxinclude(jointpath(utheaderdir, "utMath/VectorFunctions.h"))
-cxxinclude(jointpath(utheaderdir, "utMath/MatrixOperations.h"))
-cxxinclude(jointpath(utheaderdir, "utMath/Quaternion.h"))
-cxxinclude(jointpath(utheaderdir, "utMath/RotationVelocity.h"))
-cxxinclude(jointpath(utheaderdir, "utMath/Scalar.h"))
-cxxinclude(jointpath(utheaderdir, "utMath/Pose.h"))
+cxxinclude(joinpath(utheaderdir, "utMath/Vector.h"))
+cxxinclude(joinpath(utheaderdir, "utMath/Matrix.h"))
+cxxinclude(joinpath(utheaderdir, "utMath/VectorFunctions.h"))
+cxxinclude(joinpath(utheaderdir, "utMath/MatrixOperations.h"))
+cxxinclude(joinpath(utheaderdir, "utMath/Quaternion.h"))
+cxxinclude(joinpath(utheaderdir, "utMath/RotationVelocity.h"))
+cxxinclude(joinpath(utheaderdir, "utMath/Scalar.h"))
+cxxinclude(joinpath(utheaderdir, "utMath/Pose.h"))
 
