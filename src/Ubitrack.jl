@@ -8,8 +8,8 @@ using Cxx
 include(joinpath(Pkg.dir("Ubitrack"), "src/Ubitrack_libs.jl"))
 
 # static directories for now
-const utlibdir = joinpath(Pkg.dir("Ubitrack"), "deps/usr/lib")
-const utheaderdir = joinpath(Pkg.dir("Ubitrack"), "deps/usr/include")
+const utlibdir = joinpath(Pkg.dir("Ubitrack"), "deps/usr64/lib")
+const utheaderdir = joinpath(Pkg.dir("Ubitrack"), "deps/usr64/include")
 
 addHeaderDir(utlibdir; kind = C_System)
 
