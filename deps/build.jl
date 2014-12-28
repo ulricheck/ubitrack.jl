@@ -6,7 +6,7 @@ import Base: Pkg.Git
 @unix_only begin
     mkpath("src")
     cd("src")
-    Git.run("clone -b master git@git.magicvisionlab.com:mirrors/buildenvironment.git ubitrack")
+    Git.run(`clone -b master git@git.magicvisionlab.com:mirrors/buildenvironment.git ubitrack`)
     cd("ubitrack")
     Git.run(`submodule add -b master git@git.magicvisionlab.com:mirrors/utcore.git modules/utcore`)
     Git.run(`submodule add -b master git@git.magicvisionlab.com:mirrors/utcomponents.git modules/utcomponents`)
@@ -29,10 +29,10 @@ import Base: Pkg.Git
 	try
 		info("Building Ubitrack library from source")
 		cd("builds/ubitrack") do
-			options = map(x -> "-D$(x[1])=$(x[2])", [
+			options = map(x -> "-D$(x[1])=$(x[2])", Dict(
 				"BUILD_SHARED_LIBS"     => "ON",
 				"CMAKE_INSTALL_PREFIX"  => "../../usr$WORD_SIZE",
-			])
+			))
 			run(`cmake $options ../../src/ubitrack`)
 			run(`make install`)
 		end
