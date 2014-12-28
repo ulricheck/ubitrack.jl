@@ -37,7 +37,8 @@ import Homebrew
 			options = map(x -> "-D$(x[1])=$(x[2])", Dict(
 				"BUILD_SHARED_LIBS"     => "ON",
 				"CMAKE_INSTALL_PREFIX"  => "../../usr$WORD_SIZE",
-                "Boost_DIR" => Homebrew.prefix(),
+                "BOOST_INCLUDEDIR" => Homebrew.prefix()*"/include",
+                "BOOST_LIBRARYDIR" => Homebrew.prefix()*"/lib",
                 "OPENCV_ROOT_DIR" => Homebrew.prefix(),
 			))
 			run(`cmake $options ../../src/ubitrack`)
