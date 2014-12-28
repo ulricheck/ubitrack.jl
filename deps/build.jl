@@ -24,6 +24,7 @@ import Base: Pkg.Git
     Git.run(`submodule add -b master git@git.magicvisionlab.com:mirrors/multimarkertracker.git modules/multimarkertracker`)
     Git.run(`submodule add -b master git@git.magicvisionlab.com:ubitrack/utzmq.git modules/utzmq`)
     cd("..")
+    cd("..")
 
     map(mkpath, ("builds/ubitrack", "usr$WORD_SIZE"))
 	try
