@@ -3,6 +3,8 @@
 import Base: show
 import Base: Pkg.Git
 
+import Homebrew
+
 @unix_only begin
     mkpath("src")
     cd("src")
@@ -15,7 +17,7 @@ import Base: Pkg.Git
         Git.run(`submodule add -b master git@git.magicvisionlab.com:mirrors/utvisioncomponents.git modules/utvisioncomponents`)
         Git.run(`submodule add -b master git@git.magicvisionlab.com:mirrors/utfacade.git modules/utfacade`)
         Git.run(`submodule add -b master git@git.magicvisionlab.com:mirrors/utdataflow.git modules/utdataflow`)
-        Git.run(`submodule add -b master git@git.magicvisionlab.com:mirrors/uthaptics.git modules/uthaptics`)
+        # Git.run(`submodule add -b master git@git.magicvisionlab.com:mirrors/uthaptics.git modules/uthaptics`)
         Git.run(`submodule add -b master git@git.magicvisionlab.com:mirrors/utvisualization.git modules/utvisualization`)
         Git.run(`submodule add -b master git@git.magicvisionlab.com:mirrors/natnet.git modules/natnet`)
         Git.run(`submodule add -b master git@git.magicvisionlab.com:mirrors/artdriver.git modules/artdriver`)
@@ -35,6 +37,8 @@ import Base: Pkg.Git
 			options = map(x -> "-D$(x[1])=$(x[2])", Dict(
 				"BUILD_SHARED_LIBS"     => "ON",
 				"CMAKE_INSTALL_PREFIX"  => "../../usr$WORD_SIZE",
+                "Boost_DIR" => Homebrew.prefix(),
+                "OPENCV_ROOT_DIR" => Homebrew.prefix(),
 			))
 			run(`cmake $options ../../src/ubitrack`)
 			run(`make install`)
