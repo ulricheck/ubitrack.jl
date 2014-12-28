@@ -1,5 +1,4 @@
-module Ubitrack
-
+#module Ubitrack
 using Cxx
 
 # Check Julia version before continuing (also checked later in Cxx)
