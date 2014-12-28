@@ -1,11 +1,7 @@
 # installation script for local ubitrack version (with homebrew dependencies)
 
 import Base: show
-if VERSION >= v"0.3.0-"
-    import Base: Pkg.Git
-else
-    import Base: Git
-end
+import Base: Pkg.Git
 
 @unix_only begin
     mkpath("src")
