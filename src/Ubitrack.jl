@@ -1,4 +1,5 @@
-#module Ubitrack
+module Ubitrack
+
 using Cxx
 
 # Check Julia version before continuing (also checked later in Cxx)
@@ -26,6 +27,9 @@ addHeaderDir(utheaderdir; kind = C_System)
 cxxinclude(joinpath(utheaderdir, "utUtil/Logging.h"))
 cxxinclude(joinpath(utheaderdir, "utUtil/Exception.h"))
 
+# utcore
+cxxinclude(joinpath(utheaderdir, "utCore.h"))
+
 # math
 cxxinclude(joinpath(utheaderdir, "utMath/Vector.h"))
 cxxinclude(joinpath(utheaderdir, "utMath/Matrix.h"))
@@ -36,3 +40,29 @@ cxxinclude(joinpath(utheaderdir, "utMath/RotationVelocity.h"))
 cxxinclude(joinpath(utheaderdir, "utMath/Scalar.h"))
 cxxinclude(joinpath(utheaderdir, "utMath/Pose.h"))
 
+# measurement
+cxxinclude(joinpath(utheaderdir, "utMeasurement/Measurement.h"))
+
+# facade
+cxxinclude(joinpath(utheaderdir, "utFacade/utFacade.h"))
+cxxinclude(joinpath(utheaderdir, "utFacade/AdvancedFacade.h"))
+
+# components
+cxxinclude(joinpath(utheaderdir, "utComponents/ApplicationPullSink.h"))
+cxxinclude(joinpath(utheaderdir, "utComponents/ApplicationPullSource.h"))
+cxxinclude(joinpath(utheaderdir, "utComponents/ApplicationPushSink.h"))
+cxxinclude(joinpath(utheaderdir, "utComponents/ApplicationPushSource.h"))
+cxxinclude(joinpath(utheaderdir, "utComponents/ApplicationEndpointsVision.h"))
+
+
+# wrapping of methods and classes
+
+# util
+initLogging(name::String) = @cxx Ubitrack::Util::initLogging(pointer(name))
+
+
+
+
+
+
+end # module
