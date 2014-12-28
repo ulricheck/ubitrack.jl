@@ -1,3 +1,5 @@
+module Ubitrack
+
 using Cxx
 
 # Check Julia version before continuing (also checked later in Cxx)
@@ -19,5 +21,19 @@ for i in ubitrack_libraries
     dlopen_e(joinpath(utlibdir,i), RTLD_GLOBAL)==C_NULL ? throw(ArgumentError("Skip loading $(i)")): nothing
 end
 
+addHeaderDir(utheaderdir; kind = C_System)
 
+# utilities
+cxxinclude(jointpath(utheaderdir, "utUtil/Logging.h"))
+cxxinclude(jointpath(utheaderdir, "utUtil/Exception.h"))
+
+# math
+cxxinclude(jointpath(utheaderdir, "utMath/Vector.h"))
+cxxinclude(jointpath(utheaderdir, "utMath/Matrix.h"))
+cxxinclude(jointpath(utheaderdir, "utMath/VectorFunctions.h"))
+cxxinclude(jointpath(utheaderdir, "utMath/MatrixOperations.h"))
+cxxinclude(jointpath(utheaderdir, "utMath/Quaternion.h"))
+cxxinclude(jointpath(utheaderdir, "utMath/RotationVelocity.h"))
+cxxinclude(jointpath(utheaderdir, "utMath/Scalar.h"))
+cxxinclude(jointpath(utheaderdir, "utMath/Pose.h"))
 
