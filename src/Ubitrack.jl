@@ -24,7 +24,7 @@ end
 addHeaderDir(utheaderdir; kind = C_System)
 
 # hack for libxml headers
-addHeaderDir(joinpath(Pkg.dir("Ubitrack"), "deps/builds/ubitrack/modules/utcore/3rd/tinyxml"); kind = C_System)
+addHeaderDir(joinpath(Pkg.dir("Ubitrack"), "deps/src/ubitrack/modules/utcore/3rd/tinyxml"); kind = C_System)
 
 
 # utilities
