@@ -1,4 +1,4 @@
-module Ubitrack
+#module Ubitrack
 
 using Cxx
 
@@ -65,4 +65,4 @@ initLogging(name::String) = @cxx Ubitrack::Util::initLogging(pointer(name))
 
 
 
-end # module
+#end # module
