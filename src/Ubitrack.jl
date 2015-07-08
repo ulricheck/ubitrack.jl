@@ -40,77 +40,31 @@ cxx"""
  #include <exception>
 """
 
-# custom defines
-# cxx"""
-# #define TIXML_USE_STL
-# #define HAVE_TINYXML
-
-# #define HAVE_LOG4CPP
-
-# #define BOOST_FILESYSTEM_VERSION 3
-# #define HAVE_BOOST
-
-# #define HAVE_LAPACK
-
-# #define HAVE_OPENCV
-
-# #define HAVE_TBB
-
-# #define HAVE_FREEGLUT
-
-# #define HAVE_PTHREAD
-# """
-
-
-# utilities
-# cxxinclude(joinpath(utheaderdir, "utUtil/Logging.h"))
-# cxxinclude(joinpath(utheaderdir, "utUtil/Exception.h"))
-
-# utcore
-# cxxinclude(joinpath(utheaderdir, "utCore.h"))
-
-# math
-# cxxinclude(joinpath(utheaderdir, "utMath/Vector.h"))
-# cxxinclude(joinpath(utheaderdir, "utMath/Matrix.h"))
-# cxxinclude(joinpath(utheaderdir, "utMath/VectorFunctions.h"))
-# cxxinclude(joinpath(utheaderdir, "utMath/MatrixOperations.h"))
-# cxxinclude(joinpath(utheaderdir, "utMath/Quaternion.h"))
-# cxxinclude(joinpath(utheaderdir, "utMath/RotationVelocity.h"))
-# cxxinclude(joinpath(utheaderdir, "utMath/Scalar.h"))
-# cxxinclude(joinpath(utheaderdir, "utMath/Pose.h"))
-
-# measurement
-# cxxinclude(joinpath(utheaderdir, "utMeasurement/Measurement.h"))
-
 # facade
 cxxinclude(joinpath(utheaderdir, "utFacade/utFacade.h"))
 cxxinclude(joinpath(utheaderdir, "utFacade/BasicFacadeTypes.h"))
 cxxinclude(joinpath(utheaderdir, "utFacade/BasicFacadeComponents.h"))
 cxxinclude(joinpath(utheaderdir, "utFacade/BasicFacade.h"))
 
-# components
-# cxxinclude(joinpath(utheaderdir, "utComponents/ApplicationPullSink.h"))
-# cxxinclude(joinpath(utheaderdir, "utComponents/ApplicationPullSource.h"))
-# cxxinclude(joinpath(utheaderdir, "utComponents/ApplicationPushSink.h"))
-# cxxinclude(joinpath(utheaderdir, "utComponents/ApplicationPushSource.h"))
-# cxxinclude(joinpath(utheaderdir, "utComponents/ApplicationEndpointsVision.h"))
-
-
 # wrapping of methods and classes
 
 # util
 initLogging(name::String) = @cxx Ubitrack::Facade::initUbitrackLogging(pointer(name))
 
+# basicmeasurements
 
+
+
+# basicfacade
 BasicFacade(components_path::String) = @cxx Ubitrack::Facade::BasicFacade(pointer(components_path))
 
-cxx"""unsigned long long int BF_now(Ubitrack::Facade::BasicFacade& facade) { return facade.now(); }"""
-now(facade) = @cxx BF_now(facade)
+cxx"""unsigned long long int BF_now() { return Ubitrack::Facade::BasicFacade::now(); }"""
+now() = @cxx BF_now()
 
-cxx"""bool BF_loadDataflow( Ubitrack::Facade::BasicFacade& facade, const std::string& sDfSrg ) { return facade.loadDataflow(sDfSrg); }"""
+cxx"""bool BF_loadDataflow( Ubitrack::Facade::BasicFacade& facade, const char* sDfSrg ) { return facade.loadDataflow(sDfSrg); }"""
 loadDataflow(facade, filename::String) = @cxx BF_loadDataflow(facade, pointer(filename))
 
-cxx"""bool BF_loadDataflowString( Ubitrack::Facade::BasicFacade& facade, const std::string& sDataflow) { return facade.loadDataflowString(sDataflow); }"""
+cxx"""bool BF_loadDataflowString( Ubitrack::Facade::BasicFacade& facade, const char* sDataflow) { return facade.loadDataflowString(sDataflow); }"""
 loadDataflowString(facade, dfdata::String) = @cxx BF_loadDataflowString(facade, pointer(dfdata))
 
 cxx"""void BF_clearDataflow(Ubitrack::Facade::BasicFacade& facade) { facade.clearDataflow(); }"""
@@ -122,10 +76,10 @@ startDataflow(facade) = @cxx BF_startDataflow(facade)
 cxx"""void BF_stopDataflow(Ubitrack::Facade::BasicFacade& facade) { facade.stopDataflow(); }"""
 stopDataflow(facade) = @cxx BF_stopDataflow(facade)
 
-cxx"""void BF_connectToServer(Ubitrack::Facade::BasicFacade& facade, const std::string& sAddress) { facade.connectToServer(sAddress); }"""
+cxx"""void BF_connectToServer(Ubitrack::Facade::BasicFacade& facade, const char* sAddress) { facade.connectToServer(sAddress); }"""
 connectToServer(facade, sAddress::String) = @cxx BF_startDataflow(facade, pointer(sAddress))
 
-cxx"""void BF_sendUtqlToServer(Ubitrack::Facade::BasicFacade& facade, const std::string& sUtqlFile) { facade.sendUtqlToServer(sUtqlFile); }"""
+cxx"""void BF_sendUtqlToServer(Ubitrack::Facade::BasicFacade& facade, const char* sUtqlFile) { facade.sendUtqlToServer(sUtqlFile); }"""
 sendUtqlToServer(facade, sUtqlFile::String) = @cxx BF_sendUtqlToServer(facade, pointer(sUtqlFile))
 
 cxx"""void BF_sendUtqlToServerString(Ubitrack::Facade::BasicFacade& facade, std::string& buffer) { facade.sendUtqlToServerString(buffer); }"""
