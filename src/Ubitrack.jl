@@ -18,7 +18,7 @@ addHeaderDir(utlibdir; kind = C_System)
 # Load Ubitrack shared libraries
 # IMPORTANT: if necessary, make sure to link symbols accross libraries with RTLD_GLOBAL
 for i in ubitrack_libraries
-    dlopen_e(joinpath(utlibdir,i), RTLD_GLOBAL)==C_NULL ? throw(ArgumentError("Skip loading $(i)")): nothing
+    Libdl.dlopen(joinpath(utlibdir,i), Libdl.RTLD_GLOBAL)==C_NULL ? throw(ArgumentError("Skip loading $(i)")): nothing
 end
 
 addHeaderDir(utheaderdir; kind = C_System)
