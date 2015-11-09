@@ -1,4 +1,4 @@
-#module Ubitrack
+module ubitrack
 
 using Cxx
 using Compat, Compat.Libdl
@@ -112,4 +112,4 @@ sendUtqlToServerString(facade, buffer::AbstractString) = @cxx BF_sendUtqlToServe
 
 
 
-#end # module
+end # module ubitrack
