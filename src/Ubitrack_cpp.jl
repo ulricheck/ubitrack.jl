@@ -16,10 +16,21 @@ void BF_connectToServer(Facade::BasicFacade& facade, const char* sAddress) { fac
 void BF_sendUtqlToServer(Facade::BasicFacade& facade, const char* sUtqlFile) { facade.sendUtqlToServer(sUtqlFile); }
 void BF_sendUtqlToServerString(Facade::BasicFacade& facade, const char*  buffer) { facade.sendUtqlToServerString(buffer); }
 
+// basicpullsink
+Facade::BasicPullSink<Facade::BasicScalarIntMeasurement>* BF_getPullSinkScalarInt(Facade::BasicFacade& facade, const char* name) { return facade.getPullSink<Facade::BasicScalarIntMeasurement>(name); }
+Facade::BasicPullSink<Facade::BasicScalarDoubleMeasurement>* BF_getPullSinkScalarDouble(Facade::BasicFacade& facade, const char* name) { return facade.getPullSink<Facade::BasicScalarDoubleMeasurement>(name); }
+
+
+// BasicMeasurement Functions
+bool BM_isvalid(Facade::BasicMeasurement& m) { return m.isValid(); }
+unsigned long long BM_gettime(Facade::BasicMeasurement& m) { return m.time(); }
+
 Facade::BasicMeasurement::DataType BM_getdatatype(Facade::BasicMeasurement& m) { return m.getDataType(); }
+int BM_getsize(Facade::BasicMeasurement& m) { return m.size(); }
 int BM_getdimx(Facade::BasicMeasurement& m) { return m.getDimX(); }
 int BM_getdimy(Facade::BasicMeasurement& m) { return m.getDimY(); }
 int BM_getdimz(Facade::BasicMeasurement& m) { return m.getDimZ(); }
 
 int BSIM_getvalue(Facade::BasicScalarIntMeasurement& m) { int result; m.get(result); return result;}
+double BSDM_getvalue(Facade::BasicScalarDoubleMeasurement& m) { double result; m.get(result); return result;}
 """

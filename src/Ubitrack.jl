@@ -54,19 +54,10 @@ include(joinpath(Pkg.dir("ubitrack"), "src", "Ubitrack_cpp.jl"))
 initLogging(name::AbstractString) = @cxx Ubitrack::Facade::initUbitrackLogging(pointer(name))
 now() = @cxx BF_now()
 
-# basicfacade
-BasicFacade(components_path::AbstractString) = @cxx Ubitrack::Facade::BasicFacade(pointer(components_path))
-loadDataflow(facade, filename::AbstractString) = @cxx BF_loadDataflow(facade, pointer(filename))
-loadDataflowString(facade, dfdata::AbstractString) = @cxx BF_loadDataflowString(facade, pointer(dfdata))
-clearDataflow(facade) = @cxx BF_clearDataflow(facade)
-startDataflow(facade) = @cxx BF_startDataflow(facade)
-stopDataflow(facade) = @cxx BF_stopDataflow(facade)
-connectToServer(facade, sAddress::AbstractString) = @cxx BF_startDataflow(facade, pointer(sAddress))
-sendUtqlToServer(facade, sUtqlFile::AbstractString) = @cxx BF_sendUtqlToServer(facade, pointer(sUtqlFile))
-sendUtqlToServerString(facade, buffer::AbstractString) = @cxx BF_sendUtqlToServerString(facade, pointer(buffer))
 
 # basicmeasurements
 include(joinpath(Pkg.dir("ubitrack"), "src", "Ubitrack_Types.jl"))
+include(joinpath(Pkg.dir("ubitrack"), "src", "Ubitrack_Facade.jl"))
 
 
 

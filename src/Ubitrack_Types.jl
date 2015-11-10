@@ -11,12 +11,23 @@ const etDataTypeCAMERA_INTRINSICS = Cxx.CppEnum{symbol("Ubitrack::Facade::BasicM
 const etDataTypeIMAGE = Cxx.CppEnum{symbol("Ubitrack::Facade::BasicMeasurement::DataType::IMAGE")}(9)
 
 get_datatype(m) = @cxx BM_getdatatype(m)
+is_valid(m) = @cxx BM_isvalid(m)
+get_time(m) = @cxx BM_gettime(m)
+get_size(m) = @cxx BM_getsize(m)
 get_dimx(m) = @cxx BM_getdimx(m)
 get_dimy(m) = @cxx BM_getdimy(m)
 get_dimz(m) = @cxx BM_getdimz(m)
 
-
+BasicScalarIntMeasurement_T = cxxt"Ubitrack::Facade::BasicScalarIntMeasurement"
 make_BasicScalarIntMeasurement() = @cxx Ubitrack::Facade::BasicScalarIntMeasurement()
-make_BasicScalarIntMeasurement(ts, value) = @cxx Ubitrack::Facade::BasicScalarIntMeasurement(ts, value)
+make_measurement(ts::UInt64, value::Int32) = @cxx Ubitrack::Facade::BasicScalarIntMeasurement(ts, value)
+get_value(m::BasicScalarIntMeasurement_T) = @cxx BSIM_getvalue(m)
+Base.show(io::IO, m::BasicScalarIntMeasurement_T) = write(io, "IntMeasurement($(get_time(m)), $(get_value(m)))")
 
-get_value(m) = @cxx BSIM_getvalue(m)
+BasicScalarDoubleMeasurement_T = cxxt"Ubitrack::Facade::BasicScalarDoubleMeasurement"
+make_BasicScalarDoubleMeasurement() = @cxx Ubitrack::Facade::BasicScalarDoubleMeasurement()
+make_measurement(ts::UInt64, value::Float64) = @cxx Ubitrack::Facade::BasicScalarDoubleMeasurement(ts, value)
+get_value(m::BasicScalarDoubleMeasurement_T) = @cxx BSDM_getvalue(m)
+Base.show(io::IO, m::BasicScalarDoubleMeasurement_T) = write(io, "DoubleMeasurement($(get_time(m)), $(get_value(m)))")
+
+
