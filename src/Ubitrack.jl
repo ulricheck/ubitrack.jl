@@ -51,6 +51,7 @@ cxxinclude(joinpath(utheaderdir, "utFacade/BasicFacade.h"))
 include(joinpath(Pkg.dir("ubitrack"), "src", "Ubitrack_cpp.jl"))
 
 # global
+initLogging() = @cxx Ubitrack::Facade::initUbitrackLogging(pointer("log4cpp.conf"))
 initLogging(name::AbstractString) = @cxx Ubitrack::Facade::initUbitrackLogging(pointer(name))
 now() = @cxx BF_now()
 
@@ -60,6 +61,7 @@ include(joinpath(Pkg.dir("ubitrack"), "src", "Ubitrack_Types.jl"))
 include(joinpath(Pkg.dir("ubitrack"), "src", "Ubitrack_Facade.jl"))
 
 
+include(joinpath(Pkg.dir("ubitrack"), "src", "Ubitrack_tests.jl"))
 
 
 # cxx"""
